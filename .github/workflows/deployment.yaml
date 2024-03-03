@@ -23,7 +23,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: .net-app
+          name: dotnet-app
           path: ${{env.DOTNET_ROOT}}/package
   deploy:
     runs-on: ubuntu-latest
@@ -37,8 +37,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
-     
+          name: dotnet-app
+
+      - name: Display structure of downloaded files
+        run: ls -R
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -52,5 +54,3 @@ jobs:
           app-name: 'shiftkey-growing'
           slot-name: 'production'
           package: .
-
-          

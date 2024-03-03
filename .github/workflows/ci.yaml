@@ -1,3 +1,5 @@
+name: Build
+
 on:
   push:
     branches:
@@ -15,4 +17,4 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
-      - run: dotnet build
+      - run: dotnet build -c Release
