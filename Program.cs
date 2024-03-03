@@ -22,7 +22,7 @@ app.MapGet("/latest/image", async context =>
     bool exists = cache.TryGetValue(LatestImageCacheKey, out byte[]? cachedValue);
     if (exists)
     {
-         await context.Response.BodyWriter.WriteAsync(cachedValue);
+        await context.Response.BodyWriter.WriteAsync(cachedValue);
     }
     else
     {
@@ -41,7 +41,10 @@ app.MapGet("/latest/image", async context =>
 
             var imageBytes = initialStream.ToArray();
 
-            cache.Set(LatestImageCacheKey, imageBytes);
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
+
+            cache.Set(LatestImageCacheKey, imageBytes, cacheEntryOptions);
 
             await context.Response.BodyWriter.WriteAsync(imageBytes);
         }
