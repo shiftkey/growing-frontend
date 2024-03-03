@@ -1,4 +1,3 @@
-using System.Net;
 using Azure.Storage.Blobs;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -13,20 +12,11 @@ const string latestFileName = "latest.jpg";
 
 MemoryCache cache = new(new MemoryCacheOptions());
 
-
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 
-// TODO: in this handler we need
-//        - check the cached value
-//        - if found
-//                - return data with cache headers
-//        - otherwise we need to fetch latest version
-//                -  build up connection
-//                - query for binary data
-//                - store image in cache
-//                - return data with cache headers
-//
+
+// TODO: set cache headers
 app.MapGet("/latest/image", async context =>
 {
     bool exists = cache.TryGetValue(LatestImageCacheKey, out byte[]? cachedValue);
@@ -58,6 +48,6 @@ app.MapGet("/latest/image", async context =>
     }
 });
 
-// TODO: add some stylings
+// TODO: add some stylings to default page
 app.MapGet("/", () => Results.Extensions.RazorSlice("/Slices/Index.cshtml"));
 app.Run();
