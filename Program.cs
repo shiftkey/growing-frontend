@@ -9,7 +9,6 @@ const string LatestImageCacheKey = "LatestImage";
 const string containerName = "images";
 const string latestFileName = "latest.jpg";
 
-
 MemoryCache cache = new(new MemoryCacheOptions());
 
 app.UseStaticFiles();
@@ -79,16 +78,14 @@ app.MapGet("/latest/image", async context =>
     }
     else
     {
-        var connectionString = Environment.GetEnvironmentVariable("BLOB_STORAGE_CONNECTION_STRING");
         if (string.IsNullOrWhiteSpace(connectionString))
         {
-            context.Response.StatusCode = 404;
+            context.Response.StatusCode = 403;
+            return;
         }
-        else
-        {
-            var imageBytes = FetchLatestImageFromCache(connectionString);
-            await context.Response.BodyWriter.WriteAsync(imageBytes);
-        }
+
+        var imageBytes = FetchLatestImageFromCache(connectionString);
+        await context.Response.BodyWriter.WriteAsync(imageBytes);
     }
 });
 
