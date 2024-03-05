@@ -36,6 +36,38 @@ byte[] FetchLatestImageFromCache(string connectionString)
     return imageBytes;
 }
 
+app.MapPost("/callback", context =>
+{
+    if (string.IsNullOrWhiteSpace(bearerToken) || string.IsNullOrWhiteSpace(connectionString))
+    {
+        // the app isn't setup right, ignore this request
+        context.Response.StatusCode = 403;
+        return Task.CompletedTask;
+    }
+
+    var header = context.Request.Headers.Authorization;
+    var firstValue = header.FirstOrDefault();
+    if (firstValue == null)
+    {
+        // no authorization header found, reject this and ignore
+        context.Response.StatusCode = 403;
+        return Task.CompletedTask;
+    }
+
+    var values = firstValue.Split(" ");
+    if (values.Length == 2
+        && values[0].Equals("Bearer", StringComparison.Ordinal)
+        && values[1].Equals(bearerToken, StringComparison.Ordinal))
+    {
+        // we trust the source of this request, let's update the cached value
+        FetchLatestImageFromCache(connectionString);
+        return Task.CompletedTask;
+    }
+
+    // you don't have to go home but you can't stay here
+    context.Response.StatusCode = 403;
+    return Task.CompletedTask;
+});
 
 // TODO: set cache headers
 app.MapGet("/latest/image", async context =>
