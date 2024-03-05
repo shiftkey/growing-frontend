@@ -28,7 +28,7 @@ byte[] FetchLatestImageFromCache(string connectionString)
     var imageBytes = initialStream.ToArray();
 
     var cacheEntryOptions = new MemoryCacheEntryOptions()
-            .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
+            .SetAbsoluteExpiration(TimeSpan.FromMinutes(60));
 
     cache.Set(LatestImageCacheKey, imageBytes, cacheEntryOptions);
 
