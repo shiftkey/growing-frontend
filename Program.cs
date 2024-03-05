@@ -54,19 +54,7 @@ app.MapGet("/latest/image", async context =>
         }
         else
         {
-            var lastBlobClient = new BlobClient(connectionString, containerName, latestFileName);
-
-            var initialStream = new MemoryStream();
-            var response = lastBlobClient.DownloadTo(initialStream);
-            initialStream.Seek(0, SeekOrigin.Begin);
-
-            var imageBytes = initialStream.ToArray();
-
-            var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
-
-            cache.Set(LatestImageCacheKey, imageBytes, cacheEntryOptions);
-
+            var imageBytes = FetchLatestImageFromCache(connectionString);
             await context.Response.BodyWriter.WriteAsync(imageBytes);
         }
     }
