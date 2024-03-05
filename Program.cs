@@ -15,6 +15,27 @@ MemoryCache cache = new(new MemoryCacheOptions());
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 
+var bearerToken = Environment.GetEnvironmentVariable("CALLBACK_BEARER_TOKEN");
+var connectionString = Environment.GetEnvironmentVariable("BLOB_STORAGE_CONNECTION_STRING");
+
+byte[] FetchLatestImageFromCache(string connectionString)
+{
+    var lastBlobClient = new BlobClient(connectionString, containerName, latestFileName);
+
+    var initialStream = new MemoryStream();
+    var response = lastBlobClient.DownloadTo(initialStream);
+    initialStream.Seek(0, SeekOrigin.Begin);
+
+    var imageBytes = initialStream.ToArray();
+
+    var cacheEntryOptions = new MemoryCacheEntryOptions()
+            .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
+
+    cache.Set(LatestImageCacheKey, imageBytes, cacheEntryOptions);
+
+    return imageBytes;
+}
+
 
 // TODO: set cache headers
 app.MapGet("/latest/image", async context =>
