@@ -68,13 +68,20 @@ app.MapPost("/callback", context =>
     return Task.CompletedTask;
 });
 
+async Task WriteImageToResponse(HttpResponse response, byte[] imageBytes)
+{
+    response.Headers["Content-Type"] = "image/jpeg";
+    response.Headers["Cache-Control"] = "max-age=600";
+    await response.BodyWriter.WriteAsync(imageBytes);
+}
+
 // TODO: set cache headers
 app.MapGet("/latest/image", async context =>
 {
     bool exists = cache.TryGetValue(LatestImageCacheKey, out byte[]? cachedValue);
-    if (exists)
+    if (exists && cachedValue != null)
     {
-        await context.Response.BodyWriter.WriteAsync(cachedValue);
+        await WriteImageToResponse(context.Response, cachedValue);
     }
     else
     {
@@ -85,10 +92,7 @@ app.MapGet("/latest/image", async context =>
         }
 
         var imageBytes = FetchLatestImageFromCache(connectionString);
-
-        context.Response.Headers["Content-Type"] = "image/jpeg";
-        context.Response.Headers["Cache-Control"] = "max-age=600";
-        await context.Response.BodyWriter.WriteAsync(imageBytes);
+        await WriteImageToResponse(context.Response, imageBytes);
     }
 });
 
