@@ -1,0 +1,26 @@
+@page "/"
+
+@* only pull in the tag helpers we need *@
+@addTagHelper "Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers"
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>let's grow some things</title>
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <h1>let's grow some things</h1>
+    </header>
+
+    <section class="intro">
+        <p>This is a little frontend that I'm using to track the seeds growing in the basement over time.</p>
+    </section>
+
+    <section class="snapshot">
+        <img src="/latest/image" width="800" />
+    </section>
+</body>
+</html>

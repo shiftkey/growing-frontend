@@ -3,6 +3,8 @@ using Microsoft.Extensions.Caching.Memory;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
 const string LatestImageCacheKey = "LatestImage";
@@ -95,6 +97,6 @@ app.MapGet("/latest/image", async context =>
     }
 });
 
-// TODO: add some stylings to default page
-app.MapGet("/", () => Results.Extensions.RazorSlice("/Slices/Index.cshtml"));
+app.MapRazorPages();
+
 app.Run();
