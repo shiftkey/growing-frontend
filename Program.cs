@@ -70,12 +70,11 @@ app.MapPost("/callback", context =>
 
 async Task WriteImageToResponse(HttpResponse response, byte[] imageBytes)
 {
-    response.Headers["Content-Type"] = "image/jpeg";
-    response.Headers["Cache-Control"] = "max-age=600";
+    response.Headers.ContentType = "image/jpeg";
+    response.Headers.CacheControl = "max-age=600";
     await response.BodyWriter.WriteAsync(imageBytes);
 }
 
-// TODO: set cache headers
 app.MapGet("/latest/image", async context =>
 {
     bool exists = cache.TryGetValue(LatestImageCacheKey, out byte[]? cachedValue);
