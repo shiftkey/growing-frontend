@@ -1,3 +1,35 @@
-h1 {
+/* Adapting from https://stock.adobe.com//80715506/ */
+/* 
+.Lettuce-crops-in-greenhouse-1-hex { color: #1A2601; }
+.Lettuce-crops-in-greenhouse-2-hex { color: #465902; }
+.Lettuce-crops-in-greenhouse-3-hex { color: #C9D991; }
+.Lettuce-crops-in-greenhouse-4-hex { color: #A9BF04; }
+.Lettuce-crops-in-greenhouse-5-hex { color: #93A603; }
+ */
 
+body {
+    margin: 0 3em;
+    background-color: #C9D991;
+    color: #1A2601;
+    font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    color: #465902;
+}
+
+section.intro {
+    display: flex;
+    justify-content: center;
+}
+
+section.snapshot {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
