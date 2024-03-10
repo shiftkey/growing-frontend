@@ -85,6 +85,9 @@ app.MapGet("/latest/image", async context =>
         }
 
         var imageBytes = FetchLatestImageFromCache(connectionString);
+
+        context.Response.Headers["Content-Type"] = "image/jpeg";
+        context.Response.Headers["Cache-Control"] = "max=age: 600";
         await context.Response.BodyWriter.WriteAsync(imageBytes);
     }
 });
