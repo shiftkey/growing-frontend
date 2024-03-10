@@ -14,6 +14,13 @@ MemoryCache cache = new(new MemoryCacheOptions());
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 
+if (app.Environment.IsDevelopment())
+{
+    // source: https://www.meziantou.net/list-all-routes-in-an-asp-net-core-application.htm
+    app.MapGet("/debug/routes", (IEnumerable<EndpointDataSource> endpointSources) =>
+        string.Join("\n", endpointSources.SelectMany(source => source.Endpoints)));
+}
+
 var bearerToken = Environment.GetEnvironmentVariable("CALLBACK_BEARER_TOKEN");
 var connectionString = Environment.GetEnvironmentVariable("BLOB_STORAGE_CONNECTION_STRING");
 
