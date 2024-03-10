@@ -18,7 +18,8 @@ header {
     text-align: center;
 }
 
-h1, h2 {
+h1,
+h2 {
     color: #465902;
 }
 
@@ -29,12 +30,6 @@ section.intro {
 
 h2 {
     text-align: center;
-}
-
-section.graphic {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
 }
 
 section.snapshot {
@@ -48,4 +43,63 @@ section.snapshot {
 section.snapshot img {
     max-width: 100%;
     display: block;
+}
+
+section.graphic {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mat {
+    background: grey;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.pod {
+    background: brown;
+    border: 2px solid brown;
+    border-radius: 5px;
+    width: 14vh;
+    height: 14vh;
+    margin: 1vh
+}
+
+.half-pod {
+    height: 6vh;
+    margin: 0.75vh 0.5vh 0.75vh 0.5vh;
+    background: burlywood;
+    border: 2px solid burlywoodbrown;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.pod-ref {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    line-height: 14vh;
+    font-size: x-large;
+}
+
+.half-pod-ref {
+    line-height: 6vh;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    font-size: x-large;
 }
