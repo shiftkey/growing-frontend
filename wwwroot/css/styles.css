@@ -48,12 +48,14 @@ section.snapshot img {
 section.graphic {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
 .mat {
     background: grey;
     width: 100%;
+    max-width: 660px;
     display: flex;
     flex-direction: row;
 }
