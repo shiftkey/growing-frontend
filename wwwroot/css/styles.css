@@ -14,12 +14,14 @@ body {
     font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
 }
 
-header {
+header,
+footer {
     text-align: center;
 }
 
 h1,
-h2 {
+h2,
+h3 {
     color: #465902;
 }
 
@@ -34,9 +36,8 @@ h2 {
 
 section.snapshot {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin: 3vh 0;
 }
 
@@ -66,9 +67,7 @@ section.graphic {
 }
 
 .pod {
-    background: brown;
-    border: 2px solid brown;
-    border-radius: 5px;
+    border-radius: 10px;
     width: 14vh;
     height: 14vh;
     margin: 1vh
@@ -88,6 +87,10 @@ section.graphic {
     align-items: center;
 }
 
+.pod, .half-pod {
+    background-position-x: center;
+}
+
 .pod-ref {
     color: white;
     text-align: center;
@@ -104,4 +107,38 @@ section.graphic {
     font-weight: bold;
     vertical-align: middle;
     font-size: x-large;
+}
+
+.purple-peppers {
+    background-image: url('/images/buena-mulata.png');
+    
+}
+
+.eucalyptus-baby-blue {
+    background-image: url('/images/eucalyptus-baby-blue.png');
+}
+
+.habanero-orange-pepper {
+    background-image: url('/images/habanero-orange-pepper.png');
+    background-position-x: left;
+}
+
+.milkweed {
+    background-image: url('/images/milkweed.png');
+}
+
+.poblano {
+    background-image: url('/images/poblano.png');
+    background-position-x: right;
+    background-position-y: center;
+}
+
+.cucamelon {
+    background-image: url('/images/cucamelon.png');
+}
+
+.tomato-mix {
+    background-image: url('/images/tomato-mix.png');
+    background-position-x: right;
+    background-position-y: center;
 }
