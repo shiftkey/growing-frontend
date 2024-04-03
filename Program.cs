@@ -26,12 +26,12 @@ if (app.Environment.IsDevelopment())
 var bearerToken = Environment.GetEnvironmentVariable("CALLBACK_BEARER_TOKEN");
 var connectionString = Environment.GetEnvironmentVariable("BLOB_STORAGE_CONNECTION_STRING");
 
-byte[] FetchLatestImageFromCache(string connectionString)
+async ValueTask<byte[]> FetchLatestImageFromCache(string connectionString)
 {
     var lastBlobClient = new BlobClient(connectionString, containerName, latestFileName);
 
     var initialStream = new MemoryStream();
-    var response = lastBlobClient.DownloadTo(initialStream);
+    await lastBlobClient.DownloadToAsync(initialStream);
     initialStream.Seek(0, SeekOrigin.Begin);
 
     var imageBytes = initialStream.ToArray();
@@ -99,7 +99,7 @@ app.MapGet("/latest/image", async context =>
             return;
         }
 
-        var imageBytes = FetchLatestImageFromCache(connectionString);
+        var imageBytes = await FetchLatestImageFromCache(connectionString);
         await WriteImageToResponse(context.Response, imageBytes);
     }
 });
