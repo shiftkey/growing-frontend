@@ -68,7 +68,11 @@ app.MapPost("/callback", context =>
         && values[1].Equals(bearerToken, StringComparison.Ordinal))
     {
         // we trust the source of this request, let's update the cached value
+        //
+        // muting this warning as we don't need to await this method completing
+#pragma warning disable CS4014 
         FetchLatestImageFromCache(connectionString);
+#pragma warning restore CS4014
         return Task.CompletedTask;
     }
 
