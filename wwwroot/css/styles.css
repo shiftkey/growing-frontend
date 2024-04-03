@@ -55,8 +55,6 @@ section.graphic {
 
 .mat {
     background: grey;
-    width: 100%;
-    max-width: 660px;
     display: flex;
     flex-direction: row;
 }
@@ -68,14 +66,14 @@ section.graphic {
 
 .pod {
     border-radius: 10px;
-    width: 14vh;
-    height: 14vh;
-    margin: 1vh
+    width: 12vh;
+    height: 12vh;
+    margin: 0.6vh
 }
 
 .half-pod {
-    height: 6vh;
-    margin: 0.75vh 0.5vh 0.75vh 0.5vh;
+    height: 5vh;
+    margin: 0.6vh;
     background: burlywood;
     border: 2px solid burlywoodbrown;
     border-radius: 5px;
@@ -139,6 +137,24 @@ section.graphic {
 
 .tomato-mix {
     background-image: url('/images/tomato-mix.png');
+    background-position-x: right;
+    background-position-y: center;
+}
+
+.peppers {
+    background-image: url('/images/jalapeno.png');
+    background-position-x: right;
+    background-position-y: center;
+}
+
+.tomato-large {
+    background-image: url('/images/tomatoes-large.png');
+    background-position-x: right;
+    background-position-y: center;
+}
+
+.eggplant {
+    background-image: url('/images/eggplant.png');
     background-position-x: right;
     background-position-y: center;
 }
