@@ -39,7 +39,7 @@ jobs:
         with:
           name: dotnet-app
       - name: Login to Azure
-        uses: azure/login@v2.2.0
+        uses: azure/login@v2.3.0
         with:
           client-id: ${{ secrets.__clientidsecretname__ }}
           tenant-id: ${{ secrets.__tenantidsecretname__ }}
