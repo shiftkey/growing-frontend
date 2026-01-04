@@ -35,7 +35,7 @@ jobs:
       id-token: write
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: dotnet-app
       - name: Login to Azure
